@@ -383,7 +383,12 @@ cmd_claude() {
         ep="http://${GATEWAY_HOST}:${GATEWAY_PORT}"
     fi
     export ANTHROPIC_BASE_URL="${ep}"
-    export ANTHROPIC_API_KEY="${VEX_API_KEY:-not-needed}"
+    local api_key="${VEX_API_KEY:-not-needed}"
+    case "$ep" in
+        http://127.0.0.1*|http://localhost*) ;;
+        *) api_key="not-needed"; echo "warning: endpoint $ep is not local; API key not sent" >&2 ;;
+    esac
+    export ANTHROPIC_API_KEY="$api_key"
     export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
     export DISABLE_NON_ESSENTIAL_MODEL_CALLS=1
     unset ANTHROPIC_AUTH_TOKEN 2>/dev/null || true

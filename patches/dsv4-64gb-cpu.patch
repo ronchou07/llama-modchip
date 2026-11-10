@@ -5084,9 +5084,9 @@ index 7918845..c465833 100644
 +#ifdef O_NOFOLLOW
 +            open_flags |= O_NOFOLLOW;
 +#endif
-+            int fd = open(cfg_path, open_flags, 0666);
++            int fd = open(cfg_path, open_flags, 0600);
 +            if (fd >= 0) {
-+                (void) fchmod(fd, 0666);
++                (void) fchmod(fd, 0600);
 +                if (lseek(fd, 0, SEEK_END) < 32) {
 +                    if (write(fd, init_cfg, sizeof(init_cfg)) != sizeof(init_cfg)) {}
 +                }

@@ -250,7 +250,7 @@ cmd_run() {
     log "web chat: http://127.0.0.1:$PORT/  (the model loads in approximately 10-60 seconds)"
     if [[ -f "$NEMOTRON_HOME/api-key" && "$HOST" != 127.0.0.1 ]]; then
         log "LAN access: http://$(hostname -I 2> /dev/null | awk '{print $1}'):$PORT/"
-        log "API key (enter it in the web chat settings): $(cat "$NEMOTRON_HOME/api-key")"
+        log "API key file: $NEMOTRON_HOME/api-key (run cat on it to view; never paste into logs)"
         log "If the firewall blocks the port: sudo firewall-cmd --add-port=$PORT/tcp"
     fi
     exec "$BIN_DIR/llama-server" "${args[@]}"

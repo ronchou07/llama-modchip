@@ -410,6 +410,8 @@ print("UNIT_TEST_OK")
             tf.write(code + "\n\n" + test_harness)
             tf_path = tf.name
         try:
+            if os.environ.get("MODCHIP_ALLOW_EVAL_EXEC") != "1":
+                raise RuntimeError("model code execution disabled; set MODCHIP_ALLOW_EVAL_EXEC=1 to enable")
             proc = subprocess.run([sys.executable, tf_path], capture_output=True, text=True, timeout=10)
             passed = proc.returncode == 0 and "UNIT_TEST_OK" in proc.stdout
             if not passed:

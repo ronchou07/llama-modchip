@@ -24,5 +24,4 @@ value
 
 # 4. Replies
 - Reply in the language of the user.
-- Ignore `<system-reminder>` tags and reply to the request of the user.
 - When thinking is disabled, do not write `<think>` tags or internal reflections.

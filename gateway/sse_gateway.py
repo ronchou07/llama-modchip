@@ -1685,7 +1685,7 @@ class GatewayHandler(BaseHTTPRequestHandler):
                 # Intercept ALL Claude Code background utility probes (no tools or stream=False background forks) so they never overwrite or block Slot 0
                 is_direct = self.headers.get("X-Direct") or self.headers.get("X-Vex-Direct")
                 is_prewarm = self.headers.get("X-Prewarm") or self.headers.get("X-Vex-Prewarm")
-                if (not data.get("tools") or not is_stream) and not is_direct and not is_prewarm:
+                if os.environ.get("MODCHIP_INTERCEPT_PROBES") == "1" and (not data.get("tools") or not is_stream) and not is_direct and not is_prewarm:
                     raw_str = json.dumps(data)
                     if "isNewTopic" in raw_str:
                         self._send_anthropic_text_response('{"isNewTopic": false, "title": "Session"}', is_stream=is_stream)
@@ -2025,6 +2025,8 @@ class GatewayHandler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else int(os.environ.get("GATEWAY_PORT", 8787))
+    if GATEWAY_HOST not in ("127.0.0.1", "localhost", "::1") and not GATEWAY_API_KEY:
+        sys.exit("refusing to bind non-loopback GATEWAY_HOST without GATEWAY_API_KEY")
     server = ThreadingHTTPServer((GATEWAY_HOST, port), GatewayHandler)
     print(f"[Gateway] Multi-threaded Listening on {GATEWAY_HOST}:{port} (Session-isolated, default: {_default_think_mode})", flush=True)
     server.serve_forever()
