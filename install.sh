@@ -4,7 +4,7 @@
 # ==============================================================================
 # Usage:
 #   One-liner (from scratch):
-#     curl -sL https://raw.githubusercontent.com/synchopate/llama-modchip/main/install.sh | bash
+#     git clone <repo-url> && bash llama-modchip/install.sh
 #
 #   From cloned repo:
 #     ./install.sh [options]

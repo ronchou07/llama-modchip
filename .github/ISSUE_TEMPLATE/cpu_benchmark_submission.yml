@@ -9,7 +9,7 @@ body:
         ### 🏆 Submit Your CPU or Hybrid GPU+CPU Scorecard!
         Run either the 2-second zero-download readiness check:
         ```bash
-        curl -sL https://raw.githubusercontent.com/synchopate/llama-modchip/main/scripts/check_cpu_readiness.py | python3
+        git clone <repo-url> && cd llama-modchip && python3 scripts/check_cpu_readiness.py
         ```
         or the live 30-second model benchmark:
         ```bash

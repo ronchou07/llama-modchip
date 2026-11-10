@@ -111,9 +111,9 @@ cd llama-modchip
 ```bash
 # 1. For 30B Nemotron-3.5-A3B (14.35 GiB — runs in 16–32 GB RAM at 25–60.4 tok/s):
 hf download Synchopate/NVIDIA-Nemotron-3.5-30B-A3B-Fractal-64-CPU-GGUF \
-  llama-server-modchip-linux-x86_64 NVIDIA-Nemotron-3.5-30B-A3B-Fractal-64.gguf --local-dir .
-chmod +x llama-server-modchip-linux-x86_64
-./llama-server-modchip-linux-x86_64 -m NVIDIA-Nemotron-3.5-30B-A3B-Fractal-64.gguf -c 262144 -t 16 --port 8080
+  NVIDIA-Nemotron-3.5-30B-A3B-Fractal-64.gguf --local-dir .
+# Build llama-server from source first (see install.sh); do not use a prebuilt binary
+./llama-server -m NVIDIA-Nemotron-3.5-30B-A3B-Fractal-64.gguf -c 262144 -t 16 --port 8080
 
 # 2. For 284B DeepSeek-V4-Flash (56.56 GiB — fits in 64 GB RAM at 9.1–14.7 tok/s):
 hf download Synchopate/DeepSeek-V4-Flash-0731-Fractal-64GB-CPU-GGUF --local-dir ./dsv4
@@ -137,7 +137,7 @@ Open **[`windows/`](windows/README.md)** and run **[`windows/AVVIA_MODCHIP.bat`]
 ### Hardware Readiness Check (Zero Model Download Required)
 
 ```bash
-curl -sL https://raw.githubusercontent.com/synchopate/llama-modchip/main/scripts/check_cpu_readiness.py | python3
+git clone <repo-url> && cd llama-modchip && python3 scripts/check_cpu_readiness.py
 ```
 
 Submit your terminal scorecard via a [GitHub Benchmark Issue](https://github.com/synchopate/llama-modchip/issues/new?template=cpu_benchmark_submission.yml) or [GitHub Discussions](https://github.com/synchopate/llama-modchip/discussions) to add your CPU to the leaderboard below.
