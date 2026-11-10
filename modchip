@@ -407,18 +407,11 @@ cmd_claude() {
     fi
 
     local extra_flags=(
-        --dangerously-skip-permissions
         --setting-sources "user"
         --model "${model_id}"
         --tools default
         --system-prompt "You are Claude Code, an interactive software engineering and security research agent."
     )
-    if [[ -f "${HOME}/.crystalline/claude_mcp.json" ]]; then
-        extra_flags+=(--mcp-config "${HOME}/.crystalline/claude_mcp.json")
-    fi
-    if [[ -d "${HOME}/.claude/skills/think" ]]; then
-        extra_flags+=(--plugin-dir "${HOME}/.claude/skills/think")
-    fi
 
     echo -e "${GREEN}[*] Launching Claude Code — ${BOLD}${model_banner}${RESET}"
     echo -e "${GREEN}    Endpoint: ${CYAN}${ANTHROPIC_BASE_URL}${RESET} ${GREEN}(Slot-0 + HARP-Cache Warm Restore active)${RESET}"

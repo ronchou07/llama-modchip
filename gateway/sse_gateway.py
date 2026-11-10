@@ -175,7 +175,7 @@ def set_session_mode(session_id: str, new_mode: str) -> None:
 
 _MAX_XML_PARAM_JSON_BYTES = 65536
 GATEWAY_API_KEY = os.environ.get("GATEWAY_API_KEY", "").strip()
-GATEWAY_STRIP_REMINDERS = os.environ.get("GATEWAY_STRIP_REMINDERS", "1") != "0"
+GATEWAY_STRIP_REMINDERS = os.environ.get("GATEWAY_STRIP_REMINDERS", "0") != "0"
 
 def _coerce_xml_param(raw, prop):
     """Convert an XML <parameter> value to the JSON type that the tool schema declares."""
